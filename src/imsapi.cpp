@@ -6,6 +6,8 @@
 #include "kbdapi.h"
 #include "joyapi.h"
 
+#include <emscripten.h>
+
 /***************************************************************************
 IMS_StartAck () - Starts up checking for a happening
  ***************************************************************************/
@@ -98,6 +100,7 @@ IMS_WaitTimed(
             hold = GFX_GetFrameCount();
             while (GFX_GetFrameCount() == hold)
             {
+                emscripten_sleep(1);
             }
             
             if (IMS_CheckAck())
@@ -114,6 +117,7 @@ end_func:
     while (IMS_IsAck())
     {
         loop--;
+        emscripten_sleep(1);
     }
     
     IMS_StartAck();

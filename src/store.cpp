@@ -18,6 +18,8 @@
 #include "fileids.h"
 #include "winids.h"
 
+#include <emscripten.h>
+
 #define BUY_MODE  0
 #define SELL_MODE 1
 
@@ -291,6 +293,7 @@ STORE_Enter(
     
     while (1)
     {
+        emscripten_sleep(1);
         MakeSellItems();
         MakeBuyItems();
         
@@ -677,6 +680,7 @@ store_exit:
     SND_Patch(FX_DOOR, 127);
     while (IMS_IsAck())
     {
+        emscripten_sleep(1);
     }
     g_button_flag = 1;
     

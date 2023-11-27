@@ -40,6 +40,8 @@
 #include <unistd.h>
 #endif // __GNUC__
 
+#include <emscripten.h>
+
 #define wmemcpy(dst,src,size) memmove(dst,src,size)
 
 struct bday_t {
@@ -893,6 +895,7 @@ Do_Game(
         {
             while (IMS_IsAck())
             {
+                emscripten_sleep(1);
             }
             SWD_SetClearFlag(0);
             RAP_ClearSides();
@@ -915,6 +918,7 @@ Do_Game(
         {
             while (IMS_IsAck())
             {
+                emscripten_sleep(1);
             }
             debugflag ^= 1;
         }
@@ -1099,6 +1103,7 @@ Do_Game(
         
         while (GFX_GetFrameCount() - local_cnt < 3)
         {
+            emscripten_sleep(1);
         }
         
         local_cnt = GFX_GetFrameCount();
@@ -1248,6 +1253,8 @@ main(
     var1 = getenv("S_HOST");
 
     InitScreen();
+
+    emscripten_set_main_loop(WIN_MainMenu, 0, 0);
 
     RAP_InitLoadSave();
     
@@ -1515,7 +1522,7 @@ main(
     game_wave[3] = 0;
     
     do
-    {
+    { 
        WIN_MainMenu();
        WIN_MainLoop();
     } while (1);

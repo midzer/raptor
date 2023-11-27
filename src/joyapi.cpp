@@ -2,6 +2,8 @@
 #include "i_video.h"
 #include "joyapi.h"
 
+#include <emscripten.h>
+
 int joy_ack;
 
 bool Up, Down, Left, Right;
@@ -230,6 +232,7 @@ JOY_Wait(
 	while (StickX || StickY || Up || Down || Left || Right || Start || Back || LeftShoulder || RightShoulder || AButton || BButton || XButton || YButton)
 	{
 		I_GetEvent();
+		emscripten_sleep(1);
 	}
 }
 

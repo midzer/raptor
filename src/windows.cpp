@@ -25,6 +25,8 @@
 #include "fileids.h"
 #include "winids.h"
 
+#include <emscripten.h>
+
 #define HANGAR_MISSION   0
 #define HANGAR_SUPPLIES  1
 #define HANGAR_EXITDOS   2
@@ -227,6 +229,7 @@ WIN_Opts(
 
     while (1)
     {
+        emscripten_sleep(1);
         patchflag = 0;
         SWD_Dialog(&dlg);
 
@@ -354,6 +357,7 @@ WIN_Opts(
                 {
                     while (!IMS_IsAck())
                     {
+                        emscripten_sleep(1);
                     }
                     SWD_GetFieldXYL(opt_window, OPTS_VMUSIC, &x, &y, &lx, &ly);
                     new_vol = cur_mx - x;
@@ -372,6 +376,7 @@ WIN_Opts(
                 {
                     while (!IMS_IsAck())
                     {
+                        emscripten_sleep(1);
                     }
                     SWD_GetFieldXYL(opt_window, OPTS_VFX, &x, &y, &lx, &ly);
                     new_vol = cur_mx - x;
@@ -463,6 +468,7 @@ WIN_Pause(
     
     while (!IMS_CheckAck())                                      
     {
+        emscripten_sleep(1);
     }
     
     SWD_DestroyWindow(window);
@@ -589,6 +595,7 @@ WIN_AskBool(
 
     while (1)
     {
+        emscripten_sleep(1);
         SWD_Dialog(&dlg);
         
         if (KBD_IsKey(SC_ESC) || JOY_IsKeyInGameBack(Back))                                                   
@@ -635,6 +642,7 @@ WIN_AskExit(
             SND_Patch(FX_MON3, 127);
             while (SND_IsPatchPlaying(FX_MON2))
             {
+                emscripten_sleep(1);
             }
             break;
         
@@ -642,6 +650,7 @@ WIN_AskExit(
             SND_Patch(FX_DAVE, 127);
             while (SND_IsPatchPlaying(FX_DAVE))
             {
+                emscripten_sleep(1);
             }
             break;
         
@@ -649,6 +658,7 @@ WIN_AskExit(
             SND_Patch(FX_MON4, 127);
             while (SND_IsPatchPlaying(FX_MON4))
             {
+                emscripten_sleep(1);
             }
             break;
         
@@ -656,6 +666,7 @@ WIN_AskExit(
             SND_Patch(FX_MON1, 127);
             while (SND_IsPatchPlaying(FX_MON1))
             {
+                emscripten_sleep(1);
             }
             break;
         
@@ -663,10 +674,12 @@ WIN_AskExit(
             SND_Patch(FX_MON2, 127);
             while (SND_IsPatchPlaying(FX_MON2))
             {
+                emscripten_sleep(1);
             }
             SND_Patch(FX_MON2, 127);
             while (SND_IsPatchPlaying(FX_MON2))
             {
+                emscripten_sleep(1);
             }
             break;
         
@@ -674,6 +687,7 @@ WIN_AskExit(
             SND_Patch(FX_MON6, 127);
             while (SND_IsPatchPlaying(FX_MON6))
             {
+                emscripten_sleep(1);
             }
             break;
         }
@@ -712,6 +726,7 @@ WIN_AskDiff(
     
     while (1)
     {
+        emscripten_sleep(1);
         SWD_Dialog(&dlg);
         
         if (KBD_IsKey(SC_ESC) || Back || BButton)                                                      
@@ -800,6 +815,7 @@ WIN_Register(
     
     while (1)
     {
+        emscripten_sleep(1);
         SWD_Dialog(&dlg);
 
         if (joy_ipt_MenuNew)                                                               
@@ -855,6 +871,7 @@ WIN_Register(
                 {
                     while (IMS_IsAck())
                     {
+                        emscripten_sleep(1);
                     }
                     if (RAP_IsSaveFile(&tp))
                         WIN_Msg("Pilot NAME and CALLSIGN Used !");
@@ -879,6 +896,7 @@ WIN_Register(
                 {
                     while (IMS_IsAck())
                     {
+                        emscripten_sleep(1);
                     }
                     cur_id++;
                     cur_id %= 4;
@@ -1134,6 +1152,7 @@ WIN_Hangar(
         
         while (1)
         {
+            emscripten_sleep(1);
             pic_cnt++;
             
             if (pic_cnt > 4)
@@ -1153,6 +1172,7 @@ WIN_Hangar(
                 local_cnt = GFX_GetFrameCount();
                 while (GFX_GetFrameCount() == local_cnt)
                 {
+                    emscripten_sleep(1);
                 }
             }
             
@@ -1289,6 +1309,7 @@ keyboard_part:
                         SND_Patch(FX_DOOR, 60);
                         while (IMS_IsAck())
                         {
+                            emscripten_sleep(1);
                         }
                         goto hangar_exit;
                     }
@@ -1309,6 +1330,7 @@ keyboard_part:
                         SND_Patch(FX_DOOR, 127);
                         while (IMS_IsAck())
                         {
+                            emscripten_sleep(1);
                         }
                         goto hangar_exit;
                     }
@@ -1330,6 +1352,7 @@ keyboard_part:
                         SND_Patch(FX_DOOR, 200);
                         while (IMS_IsAck())
                         {
+                            emscripten_sleep(1);
                         }
                         goto hangar_exit;
                     }
@@ -1349,12 +1372,14 @@ keyboard_part:
                     {
                         while (IMS_IsAck())
                         {
+                            emscripten_sleep(1);
                         }
                         sprintf(temp, "Save %s - %s ?", plr.name, plr.callsign);
                         if (WIN_AskBool(temp))
                             RAP_SavePlayer();
                         while (IMS_IsAck())
                         {
+                            emscripten_sleep(1);
                         }
                         break;
                     }
@@ -1509,6 +1534,7 @@ WIN_ShipComp(
     
     while (1)
     {
+        emscripten_sleep(1);
         SWD_Dialog(&dlg);
 
         if (joy_ipt_MenuNew)
@@ -1784,6 +1810,7 @@ WIN_MainLoop(
     
     while (1)
     {
+        emscripten_sleep(1);
         if (demo_flag != DEMO_RECORD)
         {
             if (rval == -1)
@@ -1934,6 +1961,7 @@ WIN_MainAuto(
     
     while (1)
     {
+        emscripten_sleep(1);
         switch (cur_opt)
         {
         case DEM_INTRO:
@@ -2025,6 +2053,7 @@ WIN_DemoDelay(
         local_cnt = GFX_GetFrameCount();
         while (local_cnt == GFX_GetFrameCount())
         {
+            emscripten_sleep(1);
         }
         
         d_count++;
@@ -2199,6 +2228,7 @@ WIN_MainMenu(
                 break;
             }
         }
+        emscripten_sleep(1);
     } while (1);
 
 menu_exit:

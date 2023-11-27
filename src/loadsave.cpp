@@ -32,6 +32,8 @@
 #define PATH_MAX MAX_PATH
 #endif // _MSC_VER
 
+#include <emscripten.h>
+
 #define MAX_SAVE  10
 
 char cdpath[PATH_MAX];
@@ -487,6 +489,7 @@ RAP_LoadWin(
     
     while (1)
     {
+        emscripten_sleep(1);
         SWD_Dialog(&dlg);
         
         if (joy_ipt_MenuNew)

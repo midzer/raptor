@@ -12,6 +12,8 @@
 #include "joyapi.h"
 #include "input.h"
 
+#include <emscripten.h>
+
 int g_joy_ascii;
 unsigned int fi_joy_count;
 bool fi_sec_field;
@@ -622,6 +624,7 @@ SWD_DoButton(
             cur_act = S_WIN_COMMAND;
             cur_cmd = W_NEXT;
             while (KBD_Key(SC_TAB)) {
+                emscripten_sleep(1);
             }
         }
         else
@@ -838,6 +841,7 @@ SWD_FieldInput(
         if (KBD_Key(SC_ALT))
         {
             while (KBD_Key(SC_TAB)) {
+                emscripten_sleep(1);
             }
             cur_act = S_WIN_COMMAND;
             cur_cmd = W_NEXT;
@@ -2153,6 +2157,7 @@ SWD_CheckMouse(
     if (mflag)
     {
         while (mouseb1) {
+            emscripten_sleep(1);
         }
     }
     
@@ -2451,6 +2456,7 @@ SWD_Dialog(
             while (SWD_IsButtonDown())
             {
                 I_GetEvent();
+                emscripten_sleep(1);
             }
             if (kbactive || curfld->kbflag)
                 curfld->bstatus = UP;
@@ -2506,6 +2512,7 @@ SWD_Dialog(
                 SWD_ShowAllWindows();
                 while (mouseb1)
                 {
+                    emscripten_sleep(1);
                     curwin->x = cur_mx - sx;
                     curwin->y = cur_my - sy;
                     GFX_MarkUpdate(0, 0, 320, 200);

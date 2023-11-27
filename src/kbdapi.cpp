@@ -5,6 +5,8 @@
 #include "kbdapi.h"
 #include "i_video.h"
 
+#include <emscripten.h>
+
 int kbd_ack;
 int capslock;
 int lastscan, lastascii;
@@ -260,6 +262,7 @@ KBD_Wait(
     while (KBD_Key(scancode))
     {
         I_GetEvent();
+        emscripten_sleep(1);
     }
     
     lastscan = SC_NONE;

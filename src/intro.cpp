@@ -11,6 +11,8 @@
 #include "windows.h"
 #include "fileids.h"
 
+#include <emscripten.h>
+
 movie_t frm[90];
 
 /***************************************************************************
@@ -697,6 +699,7 @@ INTRO_EndGame(
     
     while (IMS_IsAck())
     {
+        emscripten_sleep(1);
     }
     IMS_StartAck();
     
@@ -718,18 +721,21 @@ INTRO_EndGame(
     
     while (IMS_IsAck())
     {
+        emscripten_sleep(1);
     }
     IMS_StartAck();
     INTRO_Base();
     
     while (IMS_IsAck())
     {
+        emscripten_sleep(1);
     }
     IMS_StartAck();
     INTRO_Landing();
     
     while (IMS_IsAck())
     {
+        emscripten_sleep(1);
     }
     IMS_StartAck();
     WIN_WinGame(game);
@@ -770,6 +776,7 @@ INTRO_Taiwan(
             break;
         while (GFX_GetFrameCount() - local_cnt < 4)
         {
+            emscripten_sleep(1);
         }
     }
     
@@ -816,6 +823,7 @@ INTRO_Credits(
             break;
         while (GFX_GetFrameCount() - local_cnt < 4)
         {
+            emscripten_sleep(1);
         }
     }
     
@@ -823,12 +831,14 @@ INTRO_Credits(
     {
         while (SND_IsPatchPlaying(FX_THEME)) {
             I_GetEvent();
+            emscripten_sleep(1);
         }
     }
     else
     {
         while (SND_SongPlaying() && !IMS_IsAck()) {
             I_GetEvent();
+            emscripten_sleep(1);
         }
     }
     
@@ -868,6 +878,7 @@ INTRO_Credits(
         local_cnt = GFX_GetFrameCount();
         while (GFX_GetFrameCount() - local_cnt < 3)
         {
+            emscripten_sleep(1);
         }
     }
     

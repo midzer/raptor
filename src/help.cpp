@@ -13,6 +13,8 @@
 #include "fileids.h"
 #include "winids.h"
 
+#include <emscripten.h>
+
 static int startitem;
 static int curpage;
 static int maxpages;
@@ -67,6 +69,7 @@ HELP_Win(
     
     while (1)
     {
+        emscripten_sleep(1);
         if (update)
         {
             update = 0;

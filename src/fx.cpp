@@ -14,6 +14,8 @@
 #include "gssapi.h"
 #include "fileids.h"
 
+#include <emscripten.h>
+
 int music_volume;
 int dig_flag;
 int fx_device;
@@ -840,6 +842,7 @@ void SND_PlaySong(int musres, int loop, int fade)
             while (MUS_SongPlaying())
             {
                 I_GetEvent();
+                emscripten_sleep(1);
             }
         }
         GLB_UnlockItem(music_song);
@@ -866,6 +869,7 @@ void SND_FadeOutSong(void)
         while (MUS_SongPlaying())
         {
             I_GetEvent();
+            emscripten_sleep(1);
         }
         GLB_UnlockItem(music_song);
     }

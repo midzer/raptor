@@ -9,6 +9,8 @@
 #include "i_video.h"
 #include "kbdapi.h"
 
+#include <emscripten.h>
+
 int back_patch = -1;
 
 /*************************************************************************
@@ -63,6 +65,7 @@ MOVIE_Play(
     
     while (1)
     {
+        emscripten_sleep(1);
         I_GetEvent();
         pic = (char *)GLB_GetItem(curfld->item);
         
