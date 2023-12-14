@@ -1254,7 +1254,7 @@ main(
 
     InitScreen();
 
-    emscripten_set_main_loop(WIN_MainMenu, 0, 0);
+    emscripten_set_main_loop(&WIN_MainLoop, 0, 0);
 
     RAP_InitLoadSave();
     
