@@ -88,7 +88,7 @@ int SND_InitSound(void)
     spec.freq = fx_freq;
     spec.format = AUDIO_S16SYS;
     spec.channels = 2;
-    spec.samples = 4096;
+    spec.samples = 2048;
     spec.callback = FX_Fill;
     spec.userdata = NULL;
 
