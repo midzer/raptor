@@ -148,7 +148,7 @@ static int startup_delay = 1000;
 // this to be temporarily disabled via the command line.
 
 static int grabmouse = true;
-static bool nograbmouse_override = false;
+static bool nograbmouse_override = true;
 
 // The screen buffer; this is modified to draw things to the screen
 
@@ -501,6 +501,8 @@ void I_GetEvent(void)
     IPT_GetButtons();
 
     MUS_Poll();
+
+    SDL_Delay(1);
 }
 
 //
@@ -1207,12 +1209,13 @@ static void SetVideoMode(void)
 
     // In windowed mode, the window can be resized while the game is
     // running.
-    window_flags = SDL_WINDOW_RESIZABLE;
+    //window_flags = SDL_WINDOW_RESIZABLE;
 
     // Set the highdpi flag - this makes a big difference on Macs with
     // retina displays, especially when using small window sizes.
     window_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
 
+    fullscreen = false;
     if (fullscreen)
     {
         if (fullscreen_width == 0 && fullscreen_height == 0)

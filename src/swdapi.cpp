@@ -594,6 +594,7 @@ SWD_DoButton(
             cur_act = S_WIN_COMMAND;
             cur_cmd = W_NEXT;
             while (KBD_Key(SC_TAB)) {
+                SDL_Delay(1);
             }
         }
         else
@@ -810,6 +811,7 @@ SWD_FieldInput(
         if (KBD_Key(SC_ALT))
         {
             while (KBD_Key(SC_TAB)) {
+                SDL_Delay(1);
             }
             cur_act = S_WIN_COMMAND;
             cur_cmd = W_NEXT;
@@ -2137,6 +2139,7 @@ SWD_CheckMouse(
     if (mflag)
     {
         while (mouseb1) {
+            SDL_Delay(1);
         }
     }
     

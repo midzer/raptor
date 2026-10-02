@@ -6,15 +6,15 @@ SET(CMAKE_CXX_STANDARD 11)
 SET(CMAKE_C_STANDARD 11)
 
 if(NOT MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -flto -fno-rtti -fno-exceptions")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -flto -fno-rtti -fno-exceptions")
 endif()
 
 if(NOT DEFINED CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE RelWithDebInfo)
 endif()
 
-option(BUILD_WITH_SETUP "Build project with setup" ON)
+option(BUILD_WITH_SETUP "Build project with setup" OFF)
 
 if(ANDROID)
     include(FetchContent)

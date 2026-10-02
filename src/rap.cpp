@@ -1286,7 +1286,7 @@ main(
 
     RAP_InitLoadSave();
     
-#if _WIN32 || __linux__ || __APPLE__
+#if _WIN32 || __linux__ || __APPLE__ || __EMSCRIPTEN__
     if (access(RAP_SetupFilename(), 0))
     {
         INI_InitPreference(RAP_SetupFilename());
